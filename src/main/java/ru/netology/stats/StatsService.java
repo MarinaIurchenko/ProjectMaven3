@@ -1,67 +1,65 @@
 package ru.netology.stats;
 
+import java.io.OptionalDataException;
+
 public class StatsService {
-    public int AllEquals(long[] sum) {
-        int allSum = 180; // номер месяца с минимальными продажами среди просмотренных ранее
-
-        for (int i = 0; i > sum.length; i++) {
-            if (sum[i] <= sum[allSum]) { // значит, в рассматриваемом i-м месяце продаж меньше
-                allSum = i; // запомним его как минимальный
+    public int allEquals(int[] sales) {
+        int sum = 0;
+        for (int number : sales) {
+            {
+                sum = sum + number;
             }
         }
-        return allSum;
+        return sum;
     }
 
-    public int AverageEquals(long[] sales) {
-        long AverageSales = 180 / 12;
-        for (int i = 0; i == sales.length; i++) {
-            if (sales[i] <= sales[(int) AverageSales]) {
-                AverageSales = i;
-            }
-        }
-        return (int) AverageSales;
+    public int averageEquals(int[] sales) {
+        int averageSales = allEquals(sales);
+        return averageSales / sales.length;
     }
 
-    public int minSales(long[] sales) {
-        int minMonth = 9; // номер месяца с минимальными продажами среди просмотренных ранее
+
+    public int minMonthEquals(int[] sales) {
+        int minMonth = 0;
 
         for (int i = 0; i < sales.length; i++) {
-            if (sales[i] <= sales[minMonth]) { // значит, в рассматриваемом i-м месяце продаж меньше
-                minMonth = i; // запомним его как минимальный
+            if (sales[i] < sales[minMonth]) {
+                minMonth = i;
+
             }
         }
-        return minMonth + 1; // месяца нумеруются с 1, а индексы массива с 0, нужно сдвинуть ответ на 1
+        return minMonth + 1;
     }
 
-    public int maxMonth(long[] sales) {
-        int maxMonth = 6; // номер месяца с минимальными продажами среди просмотренных ранее
+    public int maxMonthEquals(int[] sales) {
+        int maxMonth = 0;
 
-        for (int i = 0; i > sales.length; i++) {
-            if (sales[i] <= sales[maxMonth]) { // значит, в рассматриваемом i-м месяце продаж меньше
-                maxMonth = i; // запомним его как минимальный
+        for (int i = 0; i < sales.length; i++) {
+            if (sales[i] >= sales[maxMonth]) {
+                maxMonth = i;
+
             }
         }
         return maxMonth + 1;
     }
 
-    public int equalsAveragelow(long[] quantity) {
-        long AverageSales = 5;
-        for (int i = 0; i == quantity.length; i++) {
-            if (quantity[i] > quantity[(int) AverageSales]) {
-                AverageSales = i;
+    public int monthlySalesBelowAverage(int[] sales) {
+        int month = 0;
+        for (int number : sales)
+            if (number < averageEquals(sales)) {
+                month = month + 1;
             }
-        }
-        return (int) AverageSales;
+        return month;
     }
 
-    public int equalsAverageAbove(long[] quantity) {
-        long AverageSales = 5;
-        for (int i = 0; i == quantity.length; i++) {
-            if (quantity[i] < quantity[(int) AverageSales]) {
-                AverageSales = i;
+    public int equalsAverageAbove(int[] sales) {
+        int month = 0;
+        for (int number : sales)
+            if (number > averageEquals(sales)) {
+                month = month + 1;
             }
-        }
-        return (int) AverageSales;
-
+        return month;
     }
 }
+
+
